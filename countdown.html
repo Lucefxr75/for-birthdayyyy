@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown to Your Birthday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+      color: #fff;
+      text-align: center;
+    }
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('assets/stars.gif') repeat;
+      z-index: -1;
+      opacity: 0.2;
+    }
+    .container {
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #ff4081;
+    }
+    .countdown {
+      font-size: 1.8em;
+      margin-top: 30px;
+      color: #fff9c4;
+      text-shadow: 1px 1px 4px #d500f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="container">
+    <h1>Countdown to Your 21st Birthday!</h1>
+    <div class="countdown" id="countdown"></div>
+    <p>Wait for the magic to happen...</p>
+  </div>
+
+  <script>
+    const birthday = new Date("June 17, 2025 00:00:00").getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      if (distance <= 0) {
+        window.location.href = "birthday.html";
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+          `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
+      }
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
